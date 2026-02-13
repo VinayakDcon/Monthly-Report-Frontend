@@ -1,0 +1,142 @@
+<!-- {% extends "base.html" %}
+{% block content %}
+
+<form method="POST" class="filter-form">
+    <label>Start Date</label>
+    <input type="date" name="start_date" required>
+
+    <label>End Date</label>
+    <input type="date" name="end_date" required>
+
+    <button type="submit">Generate Report</button>
+</form>
+
+{% if summary %}
+<div class="summary">
+    <div>Total Emails: <strong>{{ summary.total_mails }}</strong></div>
+    <div>Total Conversations: <strong>{{ summary.total_conversations }}</strong></div>
+    <div>Date Range: <strong>{{ summary.start_date }} → {{ summary.end_date }}</strong></div>
+</div>
+{% endif %}
+
+{% if report_data %}
+<table>
+    <thead>
+        <tr>
+            <th>Sent By</th>
+            <th>Sent To</th>
+            <th>Date</th>
+            <th>Mail Sent</th>
+            <th>Reply Received</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for row in report_data %}
+        <tr>
+            <td>{{ row.sendbywho }}</td>
+            <td>{{ row.sendtowho }}</td>
+            <td>{{ row.onwhichdatehesend }}</td>
+            <td class="content">{{ row.whathesend }}</td>
+            <td class="content">{{ row.whatreplyheget }}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endif %}
+
+{% endblock %} -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Outlook Mail Report</title>
+    <link rel="stylesheet" href="./style.css">
+</head>
+<body>
+
+    <h2>Outlook Mail Report</h2>
+
+    <form id="filter-form" class="filter-form">
+        <label>Start Date</label>
+        <input type="date" name="start_date" required>
+
+        <label>End Date</label>
+        <input type="date" name="end_date" required>
+
+        <button type="submit">Generate Report</button>
+    </form>
+
+    <!-- Summary -->
+    <div id="summary" class="summary" style="display:none;">
+        <div>Total Emails: <strong id="total-mails"></strong></div>
+        <div>Total Conversations: <strong id="total-conversations"></strong></div>
+        <div>Date Range: <strong id="date-range"></strong></div>
+    </div>
+
+    <!-- Table -->
+    <table id="report-table" style="display:none;">
+        <thead>
+            <tr>
+                <th>Sent By</th>
+                <th>Sent To</th>
+                <th>Date</th>
+                <th>Mail Sent</th>
+                <th>Reply Received</th>
+            </tr>
+        </thead>
+        <tbody id="report-body"></tbody>
+    </table>
+
+    <script>
+        const API_BASE = "https://api.yourdomain.com";
+
+        document.getElementById("filter-form").addEventListener("submit", function (e) {
+            e.preventDefault();
+
+            const formData = new FormData(this);
+            const payload = Object.fromEntries(formData.entries());
+
+            fetch(`${API_BASE}/outlook-report`, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify(payload)
+            })
+            .then(res => res.json())
+            .then(data => {
+                // Summary
+                document.getElementById("summary").style.display = "block";
+                document.getElementById("total-mails").innerText = data.summary.total_mails;
+                document.getElementById("total-conversations").innerText = data.summary.total_conversations;
+                document.getElementById("date-range").innerText =
+                    `${data.summary.start_date} → ${data.summary.end_date}`;
+
+                // Table
+                const tbody = document.getElementById("report-body");
+                tbody.innerHTML = "";
+
+                data.report_data.forEach(row => {
+                    const tr = document.createElement("tr");
+                    tr.innerHTML = `
+                        <td>${row.sendbywho}</td>
+                        <td>${row.sendtowho}</td>
+                        <td>${row.onwhichdatehesend}</td>
+                        <td class="content">${row.whathesend}</td>
+                        <td class="content">${row.whatreplyheget}</td>
+                    `;
+                    tbody.appendChild(tr);
+                });
+
+                document.getElementById("report-table").style.display = "table";
+            })
+            .catch(err => {
+                alert("Failed to generate report");
+                console.error(err);
+            });
+        });
+    </script>
+
+</body>
+</html>
+

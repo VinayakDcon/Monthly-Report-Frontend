@@ -1,0 +1,108 @@
+<!-- {% extends "base.html" %}
+{% block content %}
+
+<h2>Edit RFQ {{ rfq.RFQ_ID }}</h2>
+
+<form method="POST">
+
+Customer: <input name="Customer" value="{{ rfq.Customer }}"><br>
+Description: <input name="Description" value="{{ rfq.Description }}"><br>
+Received Date: <input name="Received_Date" type="date" value="{{ rfq.Received_Date }}"><br>
+Technical Ownership: <input name="TECHNICAL_OWNERSHIP" value="{{ rfq.TECHNICAL_OWNERSHIP }}"><br>
+Feasibility Completed: <input name="Feasibility_Completed" value="{{ rfq.Feasibility_Completed }}"><br>
+Quote Submitted: <input name="Quote_Submitted" value="{{ rfq.Quote_Submitted }}"><br>
+Status: <input name="Status" value="{{ rfq.Status }}"><br>
+Outcome: <input name="Outcome" value="{{ rfq.Outcome }}"><br>
+Converted Project ID: <input name="Converted_Project_ID" value="{{ rfq.Converted_Project_ID }}"><br>
+Responsible: <input name="Responsible" value="{{ rfq.Responsible }}"><br>
+
+<button type="submit">Update RFQ</button>
+
+</form>
+
+{% endblock %} -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Edit RFQ</title>
+    <link rel="stylesheet" href="./style.css">
+</head>
+<body>
+
+    <h2>Edit RFQ <span id="rfq-id"></span></h2>
+
+    <form id="edit-rfq-form">
+
+        Customer: <input name="Customer" id="Customer"><br>
+        Description: <input name="Description" id="Description"><br>
+        Received Date: <input name="Received_Date" type="date" id="Received_Date"><br>
+        Technical Ownership: <input name="TECHNICAL_OWNERSHIP" id="TECHNICAL_OWNERSHIP"><br>
+        Feasibility Completed: <input name="Feasibility_Completed" id="Feasibility_Completed"><br>
+        Quote Submitted: <input name="Quote_Submitted" id="Quote_Submitted"><br>
+        Status: <input name="Status" id="Status"><br>
+        Outcome: <input name="Outcome" id="Outcome"><br>
+        Converted Project ID: <input name="Converted_Project_ID" id="Converted_Project_ID"><br>
+        Responsible: <input name="Responsible" id="Responsible"><br>
+
+        <button type="submit">Update RFQ</button>
+    </form>
+
+    <script>
+        const API_BASE = "https://api.yourdomain.com";
+
+        // Get RFQ_ID from query param (?rfq_id=123)
+        const params = new URLSearchParams(window.location.search);
+        const rfqId = params.get("rfq_id");
+
+        if (!rfqId) {
+            alert("RFQ ID missing");
+            throw new Error("RFQ ID missing");
+        }
+
+        document.getElementById("rfq-id").innerText = rfqId;
+
+        // Fetch RFQ data
+        fetch(`${API_BASE}/rfq/${rfqId}`)
+            .then(res => res.json())
+            .then(rfq => {
+                document.getElementById("Customer").value = rfq.Customer || "";
+                document.getElementById("Description").value = rfq.Description || "";
+                document.getElementById("Received_Date").value = rfq.Received_Date || "";
+                document.getElementById("TECHNICAL_OWNERSHIP").value = rfq.TECHNICAL_OWNERSHIP || "";
+                document.getElementById("Feasibility_Completed").value = rfq.Feasibility_Completed || "";
+                document.getElementById("Quote_Submitted").value = rfq.Quote_Submitted || "";
+                document.getElementById("Status").value = rfq.Status || "";
+                document.getElementById("Outcome").value = rfq.Outcome || "";
+                document.getElementById("Converted_Project_ID").value = rfq.Converted_Project_ID || "";
+                document.getElementById("Responsible").value = rfq.Responsible || "";
+            });
+
+        // Submit update
+        document.getElementById("edit-rfq-form").addEventListener("submit", function (e) {
+            e.preventDefault();
+
+            const formData = new FormData(this);
+            const payload = Object.fromEntries(formData.entries());
+
+            fetch(`${API_BASE}/rfq/${rfqId}`, {
+                method: "PUT",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify(payload)
+            })
+            .then(res => {
+                if (!res.ok) throw new Error("Update failed");
+                alert("RFQ updated successfully");
+            })
+            .catch(err => {
+                alert("Error updating RFQ");
+                console.error(err);
+            });
+        });
+    </script>
+
+</body>
+</html>
+

@@ -1,0 +1,33 @@
+<!-- {% extends "base.html" %}
+{% block content %}
+
+<h2>Upload RFQ Excel</h2>
+
+<form method="POST" enctype="multipart/form-data">
+    <input type="file" name="file" required>
+    <button type="submit">Upload</button>
+</form>
+
+{% endblock %} -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Upload RFQ Excel</title>
+    <link rel="stylesheet" href="./style.css">
+</head>
+<body>
+
+    <h2>Upload RFQ Excel</h2>
+
+    <form 
+        method="POST" 
+        action="https://api.yourdomain.com/upload-rfq" 
+        enctype="multipart/form-data"
+    >
+        <input type="file" name="file" required>
+        <button type="submit">Upload</button>
+    </form>
+
+</body>
+</html>

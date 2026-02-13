@@ -1,0 +1,121 @@
+body {
+    font-family: Arial, sans-serif;
+    background: #f4f6f8;
+}
+
+.container {
+    width: 95%;
+    margin: auto;
+    padding: 20px;
+}
+
+.top-nav {
+    background: #0f172a;
+    padding: 12px 20px;
+    display: flex;
+    gap: 25px;
+}
+
+.top-nav a {
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.filter-form {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+button {
+    background: #2563eb;
+    color: white;
+    border: none;
+    padding: 8px 14px;
+    cursor: pointer;
+}
+
+.summary {
+    display: flex;
+    gap: 20px;
+    margin-bottom: 25px;
+}
+
+.card {
+    background: white;
+    padding: 18px;
+    border-radius: 10px;
+    width: 180px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+.card p {
+    font-size: 26px;
+    font-weight: bold;
+}
+
+.card.highlight {
+    background: #dcfce7;
+}
+
+.charts {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 20px;
+}
+
+.chart-box {
+    background: white;
+    padding: 15px;
+    border-radius: 10px;
+    height: 300px;
+}
+
+.chart-box h4 {
+    margin-bottom: 10px;
+    text-align: center;
+}
+
+table, .rfq-table {
+    width: 100%;
+    border-collapse: collapse;
+    background: white;
+    margin-top: 20px;
+}
+
+th, td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    vertical-align: top;
+}
+
+th {
+    background: #f0f0f0;
+    font-weight: 600;
+}
+
+.rfq-table tr:hover {
+    background-color: #f9fafb;
+}
+
+.content {
+    max-width: 400px;
+    white-space: pre-wrap;
+}
+
+.error {
+    background: #fee2e2;
+    color: #991b1b;
+    padding: 10px;
+    border-radius: 6px;
+    margin-bottom: 15px;
+}
+
+.back-link {
+    display: inline-block;
+    margin-top: 20px;
+    text-decoration: none;
+    color: #2563eb;
+    font-weight: bold;
+}

@@ -1,0 +1,54 @@
+<!-- {% extends "base.html" %}
+{% block content %}
+
+<h2>Add RFQ</h2>
+
+<form method="POST">
+
+RFQ ID: <input name="RFQ_ID" required><br>
+Customer: <input name="Customer"><br>
+Description: <input name="Description"><br>
+Received Date: <input name="Received_Date" type="date"><br>
+Technical Ownership: <input name="TECHNICAL_OWNERSHIP"><br>
+Feasibility Completed: <input name="Feasibility_Completed"><br>
+Quote Submitted: <input name="Quote_Submitted"><br>
+Status: <input name="Status"><br>
+Outcome: <input name="Outcome"><br>
+Converted Project ID: <input name="Converted_Project_ID"><br>
+Responsible: <input name="Responsible"><br>
+
+<button type="submit">Save RFQ</button>
+
+</form>
+
+{% endblock %} -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Add RFQ</title>
+    <link rel="stylesheet" href="./style.css">
+</head>
+<body>
+
+    <h2>Add RFQ</h2>
+
+    <form method="POST" action="https://api.yourdomain.com/add-rfq">
+        RFQ ID: <input name="RFQ_ID" required><br>
+        Customer: <input name="Customer"><br>
+        Description: <input name="Description"><br>
+        Received Date: <input name="Received_Date" type="date"><br>
+        Technical Ownership: <input name="TECHNICAL_OWNERSHIP"><br>
+        Feasibility Completed: <input name="Feasibility_Completed"><br>
+        Quote Submitted: <input name="Quote_Submitted"><br>
+        Status: <input name="Status"><br>
+        Outcome: <input name="Outcome"><br>
+        Converted Project ID: <input name="Converted_Project_ID"><br>
+        Responsible: <input name="Responsible"><br>
+
+        <button type="submit">Save RFQ</button>
+    </form>
+
+</body>
+</html>
+
