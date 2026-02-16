@@ -1,4 +1,4 @@
-import { API_BASE } from './config';
+import { API_BASE, AUTH_BASE } from './config';
 
 export const checkAuth = async (): Promise<boolean> => {
     try {
@@ -33,7 +33,7 @@ function updateAuthUI(user: any) {
 
         if (logoutBtn) {
             logoutBtn.style.display = 'inline';
-            logoutBtn.onclick = () => window.location.href = '/logout';
+            logoutBtn.onclick = () => window.location.href = `${AUTH_BASE}/logout`;
         }
 
         if (loginBtn) loginBtn.style.display = 'none';
@@ -51,7 +51,9 @@ function updateAuthUI(user: any) {
 
         if (loginBtn) {
             loginBtn.style.display = 'inline-block';
-            // loginBtn.style.margin = '0 auto'; // We will handle centering in CSS or main layout
+            if (loginBtn instanceof HTMLAnchorElement) {
+                loginBtn.href = `${AUTH_BASE}/login`;
+            }
         }
 
         // Hide navigation links when logged out
