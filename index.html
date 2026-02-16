@@ -1,32 +1,50 @@
-<!-- {% extends "base.html" %}
-{% block content %}
-
-<h2>Select Dashboard</h2>
-
-<div class="menu">
-    <a href="/outlook-report" class="card">📧 Outlook Mail Report</a>
-    <a href="/rfq-dashboard" class="card">📊 RFQ Dashboard</a>
-    <a href="/upload-rfq">Upload RFQ</a>
-</div>
-
-{% endblock %} -->
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <title>Monthly Report Dashboard</title>
-    <link rel="stylesheet" href="./style.css">
+  <meta charset="UTF-8" />
+  <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Business Development Dashboard</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 </head>
+
 <body>
-
-    <h2>Select Dashboard</h2>
-
-    <div class="menu">
-        <a href="./outlook_report.html" class="card">📧 Outlook Mail Report</a>
-        <a href="./rfq_dashboard.html" class="card">📊 RFQ Dashboard</a>
-        <a href="./upload_rfq.html" class="card">Upload RFQ</a>
+  <!-- Top Nav -->
+  <nav class="top-nav">
+    <div class="nav-brand">
+      <span>📊</span> Business Development
     </div>
+    <div class="nav-links">
+      <a href="#/outlook-report" data-link>Outlook Report</a>
+      <a href="#/rfq-dashboard" data-link>RFQ Dashboard</a>
 
+      <!-- We will handle user auth display dynamically if needed, keeping simple for now -->
+      <!-- We will handle user auth display dynamically if needed, keeping simple for now -->
+      <div class="user-menu">
+        <a href="#/" class="btn-secondary"
+          style="padding: 0.25rem 0.5rem; opacity: 0.8; font-size: 0.8rem; margin-right: 10px;">Home</a>
+
+        <span id="user-display" style="display:none;">
+          👋 Welcome <span id="user-name"></span>
+        </span>
+
+        <button id="logout-btn" class="logout-btn" style="display:none; background:none; border:none; cursor:pointer;">
+          Logout
+        </button>
+
+        <a href="/login" id="login-btn" class="btn">
+          Login
+        </a>
+      </div>
+    </div>
+  </nav>
+
+  <div class="container">
+    <div id="app"></div>
+  </div>
+
+  <script type="module" src="/src/main.ts"></script>
 </body>
-</html>
 
+</html>
