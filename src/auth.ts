@@ -1,6 +1,8 @@
+import { API_BASE } from './config';
+
 export const checkAuth = async (): Promise<boolean> => {
     try {
-        const res = await fetch('/api/me');
+        const res = await fetch(`${API_BASE}/me`);
         if (res.ok) {
             const user = await res.json();
             if (user && user.name) {

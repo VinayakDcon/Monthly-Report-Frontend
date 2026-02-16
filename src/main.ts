@@ -1,5 +1,6 @@
 import './style.css'
 import { checkAuth } from './auth';
+import { AUTH_BASE } from './config';
 import { renderHome } from './views/Home.ts'
 import { renderRFQDashboard } from './views/RFQDashboard.ts'
 import { renderOutlookReport } from './views/OutlookReport.ts'
@@ -64,7 +65,7 @@ function renderLogin() {
   // Attach Login Logic
   document.getElementById('ms-login-btn')?.addEventListener('click', async () => {
     try {
-      const res = await fetch('/login');
+      const res = await fetch(`${AUTH_BASE}/login`);
       if (res.ok) {
         const data = await res.json();
         if (data.auth_url) {
