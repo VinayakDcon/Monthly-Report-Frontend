@@ -43,7 +43,8 @@ export const renderUploadRFQ = () => {
         try {
             const response = await fetch(`${API_BASE}/upload-rfq`, {
                 method: "POST",
-                body: formData
+                    credentials: 'include',
+                    body: formData
             });
 
             if (!response.ok) throw new Error("Upload failed");

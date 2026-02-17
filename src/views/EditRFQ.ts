@@ -103,7 +103,7 @@ export const renderEditRFQ = async () => {
 
     // Fetch RFQ Data
     try {
-        const response = await fetch(`${API_BASE}/rfq/${rfqId}`);
+        const response = await fetch(`${API_BASE}/rfq/${rfqId}`, { credentials: 'include' });
         if (!response.ok) throw new Error("Failed to load RFQ");
 
         const rfq: RFQ = await response.json();
@@ -133,6 +133,7 @@ export const renderEditRFQ = async () => {
         try {
             const response = await fetch(`${API_BASE}/rfq/${rfqId}`, {
                 method: "PUT",
+                credentials: 'include',
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify(payload)
             });

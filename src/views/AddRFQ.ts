@@ -97,6 +97,7 @@ export const renderAddRFQ = () => {
         try {
             const response = await fetch(`${API_BASE}/add-rfq`, {
                 method: "POST",
+                credentials: 'include',
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify(payload)
             });

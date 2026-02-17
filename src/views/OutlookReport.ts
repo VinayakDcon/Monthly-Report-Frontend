@@ -76,6 +76,7 @@ export const renderOutlookReport = () => {
         try {
             const response = await fetch(`${API_BASE}/outlook-report`, {
                 method: "POST",
+                credentials: 'include',
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify(payload)
             });

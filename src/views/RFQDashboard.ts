@@ -72,7 +72,7 @@ export const renderRFQDashboard = async () => {
 
     // Fetch Data
     try {
-        const res = await fetch(`${API_BASE}/rfq-dashboard`);
+        const res = await fetch(`${API_BASE}/rfq-dashboard`, { credentials: 'include' });
         const data: DashboardData = await res.json();
 
         // Update KPI
@@ -117,7 +117,7 @@ export const renderRFQDashboard = async () => {
                 const rfqId = (e.target as HTMLButtonElement).dataset.id;
                 if (!rfqId || !confirm("Delete this RFQ?")) return;
 
-                await fetch(`${API_BASE}/delete-rfq/${rfqId}`, { method: "DELETE" });
+                await fetch(`${API_BASE}/delete-rfq/${rfqId}`, { method: "DELETE", credentials: 'include' });
                 // Reload dashboard
                 renderRFQDashboard();
             });
@@ -131,7 +131,7 @@ export const renderRFQDashboard = async () => {
                 btn.innerText = "Downloading...";
                 btn.disabled = true;
 
-                const response = await fetch(`${API_BASE}/download-rfq`);
+                const response = await fetch(`${API_BASE}/download-rfq`, { credentials: 'include' });
 
                 if (!response.ok) throw new Error("Network response was not ok");
 

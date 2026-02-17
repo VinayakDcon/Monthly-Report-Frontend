@@ -2,7 +2,7 @@ import { API_BASE, AUTH_BASE } from './config';
 
 export const checkAuth = async (): Promise<boolean> => {
     try {
-        const res = await fetch(`${API_BASE}/me`);
+        const res = await fetch(`${API_BASE}/me`, { credentials: 'include' });
         if (res.ok) {
             const user = await res.json();
             if (user && user.name) {
@@ -53,6 +53,20 @@ function updateAuthUI(user: any) {
             loginBtn.style.display = 'inline-block';
             if (loginBtn instanceof HTMLAnchorElement) {
                 loginBtn.href = `${AUTH_BASE}/login`;
+                loginBtn.onclick = async (ev) => {
+                    ev.preventDefault();
+                    try {
+                        const res = await fetch(`${AUTH_BASE}/login`, { credentials: 'include' });
+                        if (res.ok) {
+                            const data = await res.json();
+                            if (data.auth_url) window.location.href = data.auth_url;
+                        } else {
+                            alert('Could not connect to login service.');
+                        }
+                    } catch (e) {
+                        console.error('Login Error', e);
+                    }
+                }
             }
         }
 

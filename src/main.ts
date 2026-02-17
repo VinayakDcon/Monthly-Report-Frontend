@@ -63,9 +63,9 @@ function renderLogin() {
   }
 
   // Attach Login Logic
-  document.getElementById('ms-login-btn')?.addEventListener('click', async () => {
+    document.getElementById('ms-login-btn')?.addEventListener('click', async () => {
     try {
-      const res = await fetch(`${AUTH_BASE}/login`);
+      const res = await fetch(`${AUTH_BASE}/login`, { credentials: 'include' });
       if (res.ok) {
         const data = await res.json();
         if (data.auth_url) {
